@@ -1,0 +1,60 @@
+{{ 'section-colleciton-template.css' | asset_url | stylesheet_tag }}
+
+<div class="colleciton-template__wrapper page-width">
+    <div class="colleciton-template__image">
+        <img src="{{ section.settings.collection.image | img_url: "master" }}" alt="collection banner image" width="{{ section.settings.collection.image.width }}" height="{{ section.settings.collection.image.height }}">
+    </div>
+    <div class="collection-template__body">
+        <div class="collection-template__body__nav">
+        </div>
+        <div class="collection-template__body__sub-collection">
+            {% for collection in section.settings.collection.metafields.custom.sub_collections.value %}
+                <div class="collection-template__sub-collection__text-wrapper">
+                    <div class="sub-collection__text">
+                        <a href="{{ collection.url }}">
+                            <h2>{{ collection.title }}</h2>
+                            <span>({{ collection.products | size }} items)</span>
+                            {% if collection.description != blank %}
+                                <div class="sub-collection__text-description">{{ collection.description }}</div>
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="sub-collection__button">                
+                        <a href="{{ collection.url }}">shop all</a>
+                    </div>
+                </div>
+                <div class="collection-template__sub-collection__image">
+                    <ul class="sub-collection__image-wrapper">
+                        {% for product in collection.products limit: 3 %}
+                            <li>
+                                <a href="{{ product.url }}">
+                                    <img src="{{ product.featured_image | img_url: "master" }}" alt="image" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <hr class="grey-dooted-hr"> 
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% schema %}
+    {
+        "name": "collection template",
+        "class": "collection-template",
+        "settings": [
+            {
+                "type": "collection",
+                "id": "collection",
+                "label": "Collection"
+            },
+
+        ],
+        "presets":[
+            {
+                "name": "Collection template section"
+            }
+        ]
+    }
+{% endschema %}

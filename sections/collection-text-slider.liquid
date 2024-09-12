@@ -1,0 +1,110 @@
+{{ 'section-colleciton-text-slider.css' | asset_url | stylesheet_tag }}
+
+<div class="collection-text-slider__wrapper page-width">
+    <div class="collection-text-sldier__text-wrapper">
+        {% if section.settings.title != blank %}
+            <h1>{{ section.settings.title }}</h1>
+        {% endif %}
+        {% if section.settings.text_badge != blank %}
+            <p>{{ section.settings.text_badge }}</p>
+        {% endif %}
+        <div class="collection-text-slider__text__link">
+            {% if section.settings.new_product_link != blank %}
+                <a href="{{ section.settings.new_product_link }}">{{ section.settings.new_product_link_text }}</a> 
+            {% endif %}
+            {% if section.settings.all_product_linnk != blank %}
+            <a href="{{ section.settings.all_product_linnk }}"> | {{ section.settings.all_product_link_text }}</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="collection-text-slider__slider-wrapper">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for collection in section.settings.collection.metafields.custom.sub_collections.value %}
+                    <div class="swiper-slide collection-text-slider__slider__item">
+                        <a href="{{ collection.url }}">
+                            <img src="{{ collection.image | img_url: "130x" }}" alt="collection image" width="{{ collection.image.width }}" height="{{ collection.image.height }}">
+                            <p>{{ collection.title }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-button-prev closures-arrow">
+                {% render 'arrow-prev' %}
+            </div>
+            <div class="swiper-button-next closures-arrow">
+                {% render 'arrow-next' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const swiper1 = new Swiper('.swiper-container', {
+      slidesPerView: 5,
+      slidesPerGroup: 1,
+      spaceBetween: 10,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 7,
+        },
+      },
+    });
+  </script>
+{% schema %}
+    {
+        "name": "collection text slider",
+        "class": "collection-text-slider",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "Personalized Halloween Gifts"
+            },
+            {
+                "type": "text",
+                "id": "text_badge",
+                "label": "Text badge",
+                "default": "Up to 30% OFF"
+            },
+            {
+                "type": "url",
+                "id": "new_product_link",
+                "label": "Link for new ones"
+            },
+            {
+                "type": "text",
+                "id": "new_product_link_text",
+                "label": "Text for new product link",
+                "default": "What's New"
+            },
+            {
+                "type": "url",
+                "id": "all_product_linnk",
+                "label": "Link for all products"
+            },
+            {
+                "type": "text",
+                "id": "all_product_link_text",
+                "label": "Text for all ones",
+                "default": "Browse All"
+            },
+            {
+                "type": "collection",
+                "id": "collection",
+                "label": "Collection"
+            },
+        ],
+        "presets": [
+            {
+                "name": "Collection text slider"
+            }   
+        ]
+    }
+{% endschema %}

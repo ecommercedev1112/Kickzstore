@@ -78,6 +78,7 @@
             {% if link.current %}
               aria-current="page"
             {% endif %}
+            data-handle = "{{ link.handle }}"
           >
             <span
               {%- if link.current %}

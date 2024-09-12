@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "collection_text_slider_JWGfPE": {
+      "type": "collection-text-slider",
+      "settings": {
+        "title": "Personalized Halloween Gifts",
+        "text_badge": "Up to 30% OFF",
+        "new_product_link": "shopify:\/\/collections\/new-in-baby-gifts",
+        "new_product_link_text": "What's New",
+        "all_product_linnk": "shopify:\/\/collections\/browse-all-products",
+        "all_product_link_text": "Browse All",
+        "collection": "baby"
+      }
+    },
+    "collection_template_section_Mtbtp7": {
+      "type": "collection-template-section",
+      "settings": {
+        "collection": "baby"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "collection_text_slider_JWGfPE",
+    "collection_template_section_Mtbtp7"
+  ]
+}
